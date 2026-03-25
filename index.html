@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NeuroClassify | EEG Mental State</title>
+    <!-- Plotly.js for charts -->
+    <script src="https://cdn.plot.ly/plotly-2.24.1.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="sidebar">
+        <h2>System Diagnostics</h2>
+        <div class="status-indicator">
+            <p>Status: <strong>[ ONLINE ]</strong></p>
+            <p>Datastream: <strong id="datastream-status">WAITING</strong></p>
+        </div>
+        <hr>
+        <div class="model-info">
+            <p style="color: #0f0;">Model Core Loaded: RandomForest (3-Class Simulation)</p>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="header">
+            <h1>🧠 NeuroClassify: Mental Workload Engine</h1>
+            <h3>Real-Time EEG-Based State Inference</h3>
+        </div>
+
+        <div class="grid-container">
+            <!-- Upload Panel -->
+            <div class="panel upload-panel">
+                <h4>Upload Data Packet</h4>
+                <div class="dropzone" id="dropzone">
+                    <p>Drag and drop or Browse for .csv or .xdf (Simulated)</p>
+                    <input type="file" id="fileInput" style="display:none;" accept=".csv, .xdf" />
+                </div>
+                <button id="analyzeBtn" class="cyber-button">INITIATE ANALYSIS</button>
+            </div>
+
+            <!-- Telemetry Panel -->
+            <div class="panel telemetry-panel">
+                <h4>Mental State Telemetry</h4>
+                
+                <div id="loader" class="hidden">
+                    <p class="blink">Decrypting neural patterns...</p>
+                </div>
+
+                <div id="awaiting-msg" class="info-box">
+                    Awaiting command sequence...
+                </div>
+                
+                <div id="results-container" class="hidden">
+                    <div id="low-confidence-alert" class="hidden error-box">
+                        ⚠️ Analysis was not confident. Please ask for a retest and ensure good signal quality.
+                    </div>
+
+                    <div id="metrics-grid">
+                        <div class="metric-card">
+                            <p>Primary Cognitive State</p>
+                            <h2 id="state-name">--</h2>
+                            <p id="confidence-text" class="delta-text">Confidence: --%</p>
+                            
+                            <div id="suggestion-box" style="margin-top: 15px; font-size: 0.9em;">
+                                <!-- Suggestion loaded dynamically -->
+                            </div>
+                        </div>
+                        <div class="metric-card gauge-container">
+                            <div id="gaugeChart"></div>
+                        </div>
+                    </div>
+
+                    <div class="waveform-container">
+                        <h4>Neural Activity Waveform</h4>
+                        <div id="waveformChart"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
